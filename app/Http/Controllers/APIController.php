@@ -64,7 +64,7 @@ class APIController extends Controller {
 		],[$this->getStatusCode()] );
 	}
 
-	public static function respondNotFound($message = 'Not found'){
+	public function respondNotFound($message = 'Not found'){
 		return $this->setStatusCode(404)->respondWithError($message);
 	}
 

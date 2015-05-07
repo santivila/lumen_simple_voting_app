@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -18,6 +17,5 @@ $app->get('/', function() use ($app) {
 $app->get('/t/{token}', 'App\Http\Controllers\PagesController@confirm');
 
 /* Simple API routes*/
-// $app->post('/api/v1/votes', ['middleware' => 'cors', 'uses' =>  'App\Http\Controllers\VotesAPIController@store']);
+$app->get('/api/v1/votes/{target_id}', 'App\Http\Controllers\VotesAPIController@show');
 $app->post('/api/v1/votes', 'App\Http\Controllers\VotesAPIController@store');
-//$app->put('/api/v1/votes/{id}', 'App\Http\Controllers\VotesAPIController@update');

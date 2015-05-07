@@ -12,9 +12,40 @@ class VotesAPIController extends APIController {
     protected $transformer;
 
     /**
+     * Returns data corresponding to the given target_id.
+     * Name of the resource, total number of votes ...
+     * @param Request $request
+     * @param int $target_id
+     * @return Response
+     */
+    public function show( $target_id )
+    {
+        // Check if the target resource exists
+        $target =  Vote::where('target_id',$target_id);
+        if($target->count()){
+            // Get target votes data
+            $total_votes =  $target->where('confirmed_vote','=',true)->count();
+            // Names sent for a specific id may differ. Id is unique. Just pick the first one for now.
+            $target_name = $target->first();
+            $target_name ? $target_name = $target_name->toArray() : $target_name = ['target_name' => null];
+            // Return Json 
+            return $this->respond([
+                    'error' => false,
+                    'data'   => [
+                                'target_id' => $target_id,
+                                'target_name' => $target_name['target_name'],
+                                'total_votes' => $total_votes
+                                ]
+            ]);
+        }
+        return $this->respondNotFound();
+
+    }
+
+    /**
      * Creates a new vote in the database ans sends an email to the user
      * asking to click on a link to confirm the vote
-     * @param CarRequest $request
+     * @param Request $request
      * @return Response
      */
     public function store( Request $request )
