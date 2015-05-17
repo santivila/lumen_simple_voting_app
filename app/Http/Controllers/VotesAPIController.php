@@ -82,7 +82,7 @@ class VotesAPIController extends APIController {
             // Send the confirmation mail
             $confirmation_url = $request->root().'/t/'.$vote->token;
             $subject = env('APP_DOMAIN').': Confirm your vote';
-            Mail::send('emails.confirm_vote', ['confirmation_url' => $confirmation_url], function($message) use($vote,$subject) {
+            Mail::send('emails.confirm_vote', ['confirmation_url' => $confirmation_url, 'target_name' => $vote->target_name ], function($message) use($vote,$subject) {
                 $message->to($vote->voter_email,$vote->voter_email)->subject($subject);
             });
      

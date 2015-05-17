@@ -1,3 +1,4 @@
+<h4>{{ $target_name }}</h4>
 Siusplau confirma el teu vot fent "clic" al següent enllaç.<br>
 Por favor confirma tu voto haciendo "clic" en el siguiente enlace.<br>
 Please confirm your vote clicking on the link below.<br>
